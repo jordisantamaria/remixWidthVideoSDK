@@ -2,6 +2,15 @@
 
 - [Remix Docs](https://remix.run/docs)
 
+## Setup API_KEY and SECRET_KEY
+
+Go to ./app/utils/authVideoSDK.ts and define those keys
+
+```
+  const API_KEY = 'TODO'
+  const SECRET_KEY = 'TODO'
+```
+
 ## Development
 
 From your terminal:

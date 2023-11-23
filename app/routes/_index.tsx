@@ -1,7 +1,7 @@
 import { json, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { VideoCall } from "~/components/videoCall/videoCall";
-import { createMeeting, getVideoSDKToken } from "~/utils/videoSDK";
+import { getVideoSDKToken } from "~/utils/authVideoSDK";
 
 
 export const meta: MetaFunction = () => {
@@ -13,20 +13,12 @@ export const meta: MetaFunction = () => {
 
 export async function loader() {
   const authToken = getVideoSDKToken()
-  const meetingId = await createMeeting(authToken)
 
-  console.log({ authToken, meetingId })
-
-  return json({ authToken, meetingId })
+  return json({ authToken })
 }
 export default function Index() {
-  const { authToken, meetingId } = useLoaderData<typeof loader>()
+  const { authToken } = useLoaderData<typeof loader>()
 
-  console.log({ authToken, meetingId })
 
-  return authToken && meetingId ? (
-    <VideoCall authToken={authToken} meetingId={meetingId} />
-  ) : (
-    <div />
-  );
+  return <VideoCall authToken={authToken} />
 }
